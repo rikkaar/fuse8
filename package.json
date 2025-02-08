@@ -1,0 +1,41 @@
+{
+  "name": "fuse8",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "build:test": "tsc --noEmit && next build",
+    "start": "next start",
+    "lint": "next lint",
+    "lint:fix": "npx eslint --fix .",
+    "lint:types": "tsc --noEmit",
+    "lint:inspect": "npx @eslint/config-inspector@latest",
+    "prettify": "prettier . --write"
+  },
+  "dependencies": {
+    "@tailwindcss/postcss": "^4.0.4",
+    "@tanstack/react-query": "^5.51.23",
+    "clsx": "^2.1.1",
+    "hono": "^4.6.19",
+    "jstack": "^1.0.6",
+    "next": "^15.1.6",
+    "next-themes": "^0.4.4",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "rickmortyapi": "^2.3.0",
+    "superjson": "^2.2.1",
+    "zod": "^3.24.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.6",
+    "@types/react": "^19.0.7",
+    "@types/react-dom": "^19.0.3",
+    "dotenv": "^16.4.5",
+    "eslint": "^9.18.0",
+    "eslint-config-next": "^15.1.4",
+    "postcss": "^8.5.1",
+    "tailwindcss": "^4.0.4",
+    "typescript": "^5"
+  }
+}

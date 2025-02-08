@@ -1,0 +1,119 @@
+name: Create and publish a Docker image
+
+on: [push]
+
+env:
+  REGISTRY: ghcr.io
+
+jobs:
+  overall:
+    runs-on: self-hosted
+    outputs:
+      mode: ${{ steps.set_mode.outputs.MODE }}
+      container_name: ${{ steps.set_container_name.outputs.CONTAINER_NAME }}
+      port: ${{ steps.set_port.outputs.PORT }}
+    steps:
+      - name: Determine container name
+        id: set_container_name
+        run: echo "CONTAINER_NAME=${{ github.repository }}-${{ github.ref_name }}" | sed 's/\//-/g' >> $GITHUB_OUTPUT
+
+      - name: Determine build mode
+        id: set_mode
+        run: |
+          if [ "${{ github.ref_name }}" == "main" ]; then
+            echo "MODE=production" >> $GITHUB_OUTPUT
+          else
+            echo "MODE=development" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Determine container port
+        id: set_port
+        run: |
+          if [ "${{ github.ref_name }}" == "main" ]; then
+            echo "PORT=${{ vars.PROD_PORT }}" >> $GITHUB_OUTPUT
+          else
+            echo "PORT=${{ vars.DEV_PORT }}" >> $GITHUB_OUTPUT
+          fi
+
+  lint:
+    runs-on: self-hosted
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Install Node.js dependencies
+        run: npm ci
+
+      - name: Run linter
+        run: npm run lint
+
+  docker:
+    needs: [lint, overall]
+    runs-on: self-hosted
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Log in to the Container registry
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Extract metadata (tags, labels) for Docker
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ env.REGISTRY }}/${{ github.repository }}
+          tags: |
+            type=ref,event=branch
+            type=sha
+            type=raw,value=${{ github.ref_name }}
+
+      - name: Copy .env file
+        run: |
+          cp /env/${{ github.repository }}/.env.* .
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: ${{ github.event_name != 'pull_request' }}
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          build-args: |
+            MODE=${{ needs.overall.outputs.mode }}
+
+  deploy:
+    needs: [overall, docker]
+    runs-on: self-hosted
+    steps:
+      - name: Log in to the Container registry
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Pull Docker image for specific branch
+        run: |
+          docker pull ${{ env.REGISTRY }}/${{ github.repository }}:${{ github.ref_name }}
+      - name: Stop and remove old container
+        run: |
+          if [ $(docker ps -a -q -f name=${{ needs.overall.outputs.container_name }}) ]; then
+            docker stop ${{ needs.overall.outputs.container_name }}
+            docker rm ${{ needs.overall.outputs.container_name }}
+            docker image prune -f
+          fi
+      - name: Run new container
+        run: |
+          docker run -d -p ${{ needs.overall.outputs.port }}:8080 --name ${{ needs.overall.outputs.container_name }} ${{ env.REGISTRY }}/${{ github.repository }}:${{ github.ref_name }}
