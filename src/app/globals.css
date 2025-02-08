@@ -1,5 +1,11 @@
 @import "tailwindcss";
 
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
 /* Define the Shadcn UI CSS Variables */
 :root {
   --background: hsl(224 71% 4%);
@@ -91,4 +97,10 @@
       height: "0";
     }
   }
+
+  --font-display: 'fira-sans', 'montserrat', 'sans-serif'
 }
+
+  body {
+    @apply bg-background text-foreground font-(--fira-sans);
+  }
