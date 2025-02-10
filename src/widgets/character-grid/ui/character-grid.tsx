@@ -25,7 +25,11 @@ export const CharacterGrid = ({className, ...rest}: CharacterGridProps) => {
 
 	return (
 		<div
-			className={cn('grid-row-[262px] grid h-full w-full auto-rows-[150px] grid-cols-6 gap-5', '', className)}
+			className={cn(
+				'grid-rows-[150px] grid h-full w-full auto-rows-[150px] grid-cols-6 gap-5 md:grid-rows-[262px_150px]',
+				'',
+				className,
+			)}
 			{...rest}
 		>
 			{flattenCharacters?.map((character, index) => (
@@ -35,9 +39,7 @@ export const CharacterGrid = ({className, ...rest}: CharacterGridProps) => {
 					key={character.id}
 					className={index < 2 ? 'col-span-6 md:col-span-3 xl:col-span-3' : 'col-span-6 md:col-span-3 xl:col-span-2'}
 				>
-					<CharacterCard
-						character={character}
-					/>
+					<CharacterCard character={character} />
 				</Link>
 			))}
 			{query.isPending &&

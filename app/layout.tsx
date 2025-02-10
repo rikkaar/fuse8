@@ -1,6 +1,5 @@
 import localFont from 'next/font/local'
 import {QueryClientContextProvider} from '@/app/providers/query-client-provider'
-import {ThemeProvider} from '@/app/providers/theme-privider'
 import {cn} from '@/shared/lib/utils'
 import {Metadata} from 'next'
 import '@/app/globals.css'
@@ -65,14 +64,7 @@ export default async function RootLayout({
 		>
 			<body className={cn(Montserrat.variable, FiraSans.variable, 'flex min-h-full flex-col gap-y-5')}>
 				<QueryClientContextProvider>
-					<ThemeProvider
-						attribute='class'
-						defaultTheme='system'
-						disableTransitionOnChange
-						storageKey={'theme'}
-					>
-						{children}
-					</ThemeProvider>
+					{children}
 					<Suspense>
 						<ReactQueryDevtools buttonPosition='top-right' />
 					</Suspense>
