@@ -1,10 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: "standalone",
-  reactStrictMode: false,
-  compiler: {
-    styledComponents: true,
-  },
-};
+	output: 'standalone',
+	reactStrictMode: false,
+	compiler: {
+		styledComponents: true,
+	},
+}
 
-export default nextConfig;
+export default nextConfig

@@ -4,9 +4,9 @@ export default async function manifest(): Promise<MetadataRoute.Manifest> {
 	// Pick a locale that is representative of the app
 	// @see https://next-intl-docs.vercel.app/docs/environments/actions-metadata-route-handlers#manifest
 	return {
-		name: "Fuse8 internship",
-		short_name: "Fuse8 internship",
-		description: "A performant site built with Next.js",
+		name: 'Fuse8 internship',
+		short_name: 'Fuse8 internship',
+		description: 'A performant site built with Next.js',
 		start_url: '/',
 		display: 'standalone',
 		background_color: '#fff',
