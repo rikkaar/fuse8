@@ -4,6 +4,18 @@ import {ThemeProvider} from '@/app/providers/theme-privider'
 import {cn} from '@/shared/lib/utils'
 import {Metadata} from 'next'
 import '@/app/globals.css'
+import React, {Suspense} from 'react'
+
+const ReactQueryDevtools =
+	process.env.NODE_ENV === 'production'
+		? () => null // Render nothing in production
+		: React.lazy(() =>
+				// Lazy load in development
+				import('@tanstack/react-query-devtools').then((res) => ({
+					default: res.ReactQueryDevtools,
+					// default: res.ReactQueryDevtools
+				})),
+			)
 
 const Montserrat = localFont({
 	src: './fonts/Montserrat/Montserrat-VariableFont_wght.ttf',
@@ -61,6 +73,9 @@ export default async function RootLayout({
 					>
 						{children}
 					</ThemeProvider>
+					<Suspense>
+						<ReactQueryDevtools buttonPosition='top-right' />
+					</Suspense>
 				</QueryClientContextProvider>
 			</body>
 		</html>
