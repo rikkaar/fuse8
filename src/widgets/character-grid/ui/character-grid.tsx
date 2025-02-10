@@ -10,17 +10,13 @@ import {useIntersectionObserver} from 'usehooks-ts'
 interface CharacterGridProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 export const CharacterGrid = ({className, ...rest}: CharacterGridProps) => {
-	// IDK where to place data layer. Let it be at the page layer
 	const {query, flattenCharacters} = useInfiniteCharacters()
 	const search = useStore.use.search()
 
 	const {isIntersecting, ref} = useIntersectionObserver({
-		threshold: 0.8,
+		threshold: 0.5,
 	})
 
-	/**
-	 * Чтобы отправлять один запрос. Каждый запрос будет менять флаг о необходимости запрашивать данные
-	 */
 	useEffect(() => {
 		if (!query.isFetching && query.hasNextPage && isIntersecting) {
 			query.fetchNextPage()

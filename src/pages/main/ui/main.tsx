@@ -8,7 +8,8 @@ export const Main = () => {
 			className={cn(
 				'bg-background relative isolate min-h-screen w-full flex flex-col items-center',
 				'xl:px-40 xl:py-32',
-				'px-8 py-12',
+				'md:px-8 md:py-12',
+				'px-4 py-8',
 			)}
 		>
 			<Search className='w-full md:w-1/2 xl:w-1/3' />
