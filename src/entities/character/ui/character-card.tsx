@@ -34,6 +34,7 @@ export const CharacterCard = React.forwardRef<HTMLDivElement, CharacterCardProps
 		)
 	},
 )
+CharacterCard.displayName = 'CharacterCard'
 
 export const CharacterCardSkeleton = ({className, ...rest}: Omit<CharacterCardProps, 'character'>) => {
 	return (

@@ -6,7 +6,6 @@ import {QueryKeys} from '@/shared/constants'
 import {useObserveQuery} from '@/shared/hooks/useObserveQuery'
 import {cn} from '@/shared/lib/utils'
 import {useStore} from '@/shared/store/useStore'
-import {UseQueryResult} from '@tanstack/react-query'
 import {useMemo} from 'react'
 
 interface SearchProps extends React.HTMLAttributes<HTMLDivElement> {}

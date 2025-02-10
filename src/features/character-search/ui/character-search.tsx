@@ -1,7 +1,7 @@
 'use client'
 
 import {cn} from '@/shared/lib/utils'
-import {useEffect, useRef, useState} from 'react'
+import {useEffect, useState} from 'react'
 import {useDebounceValue} from 'usehooks-ts'
 import {useStore} from '@/shared/store/useStore'
 
@@ -9,13 +9,13 @@ interface CharacterSearchProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 export const CharacterSearch = ({className, ...rest}: CharacterSearchProps) => {
 	const [query, setQuery] = useState<string>('')
-	const [debouncedValue, setValue] = useDebounceValue(query, 300)
+	const [debouncedValue] = useDebounceValue(query, 300)
 
 	// Hold the debounced value in the store
 	const setSearch = useStore.use.setSearch()
 	useEffect(() => {
 		setSearch(debouncedValue)
-	}, [debouncedValue])
+	}, [debouncedValue, setSearch])
 
 	return (
 		<input

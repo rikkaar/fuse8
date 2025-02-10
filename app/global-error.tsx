@@ -1,4 +1,3 @@
-/* eslint-disable i18next/no-literal-string */
 'use client' // Error boundaries must be Client Components
 export default function GlobalError({reset}: {error: Error & {digest?: string}; reset: () => void}) {
 	return (
