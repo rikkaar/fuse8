@@ -35,25 +35,8 @@ jobs:
             echo "PORT=${{ vars.DEV_PORT }}" >> $GITHUB_OUTPUT
           fi
   
-  lint:
-    runs-on: self-hosted
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: 'npm'
-
-      - name: Install Node.js dependencies
-        run: node --max_old_space_size=256 `which npm` --dd ci
-        env:
-          NODE_OPTIONS: "--max_old_space_size=256"
-
   docker:
-    needs: [lint, overall]
+    needs: [overall]
     runs-on: self-hosted
     permissions:
       contents: read
