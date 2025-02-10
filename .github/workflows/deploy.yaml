@@ -65,7 +65,7 @@ jobs:
 
       - name: Copy .env file (if exists)
         run: |
-          [ -f "/env/${{ github.repository }}/.env.*" ] && cp /env/${{ github.repository }}/.env.* .
+          cp /env/${{ github.repository }}/.env.* . 2>/dev/null || :
 
       - name: Build and push Docker image
         uses: docker/build-push-action@v6
