@@ -50,7 +50,7 @@ jobs:
       - name: Install Node.js dependencies
         run: npm ci
         env:
-          NODE_OPTIONS: "--max-old-space-size=512"
+          NODE_OPTIONS: "--max-old-space-size=256"
 
       - name: Run linter
         run: npm run lint
