@@ -48,7 +48,7 @@ jobs:
           cache: 'npm'
 
       - name: Install Node.js dependencies
-        run: npm ci
+        run: npm --dd ci
         env:
           NODE_OPTIONS: "--max-old-space-size=256"
 
