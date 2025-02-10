@@ -6,7 +6,7 @@ export const Main = () => {
 	return (
 		<main
 			className={cn(
-				'bg-background relative isolate min-h-screen w-full',
+				'bg-background relative isolate min-h-screen w-full flex flex-col items-center',
 				'xl:px-40 xl:py-32',
 				'px-8 py-12',
 			)}
