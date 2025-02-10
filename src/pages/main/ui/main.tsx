@@ -6,13 +6,13 @@ export const Main = () => {
 	return (
 		<main
 			className={cn(
-				'bg-background relative isolate flex min-h-screen flex-col items-center justify-center',
+				'bg-background relative isolate min-h-screen w-full',
 				'xl:px-40 xl:py-32',
 				'px-8 py-12',
 			)}
 		>
-			<Search className='mb-auto w-full md:w-1/2 xl:w-1/3' />
-			<CharacterGrid className='xl:pt-16 pt-4 md:pt-12' />
+			<Search className='w-full md:w-1/2 xl:w-1/3' />
+			<CharacterGrid className='pt-4 md:pt-12 xl:pt-16' />
 		</main>
 	)
 }

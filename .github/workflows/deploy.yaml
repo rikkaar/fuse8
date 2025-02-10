@@ -34,7 +34,7 @@ jobs:
           else
             echo "PORT=${{ vars.DEV_PORT }}" >> $GITHUB_OUTPUT
           fi
-  
+
   docker:
     needs: [overall]
     runs-on: self-hosted

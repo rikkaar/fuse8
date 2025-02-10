@@ -1,4 +1,4 @@
-import {formatLocalized} from '@/shared/format'
+import {formatLocalized} from '@/shared/lib/format'
 import {cn} from '@/shared/lib/utils'
 import clsx from 'clsx'
 import React from 'react'
@@ -23,8 +23,8 @@ export const CharacterCard = React.forwardRef<HTMLDivElement, CharacterCardProps
 				{...rest}
 				ref={ref}
 			>
-				<h2 className='font-normal text-3xl truncate'>{character.name}</h2>
-				<div className='text-muted-foreground flex items-center justify-between font-family-montserrat text-sm'>
+				<h2 className='truncate text-3xl font-normal'>{character.name}</h2>
+				<div className='text-muted-foreground font-family-montserrat flex items-center justify-between text-sm'>
 					<span>
 						Status: <span className={cn(characterStatusColor(character.status), 'font-bold')}>{character.status}</span>
 					</span>

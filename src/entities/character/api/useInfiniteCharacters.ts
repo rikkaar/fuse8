@@ -15,7 +15,7 @@ export const useInfiniteCharacters = () => {
 			})
 			return res
 		},
-		enabled: Boolean(searchQuery.length) && searchQuery.length > 3,
+		enabled: Boolean(searchQuery.length),
 		initialPageParam: 1,
 		getNextPageParam: (lastPage, pages, lastPageParam, allPageParams) => {
 			return lastPage?.data?.info?.next ? lastPageParam + 1 : undefined

@@ -22,7 +22,7 @@ export const Search = ({className, ...rest}: SearchProps) => {
 		>
 			<CharacterSearch className='' />
 			{Boolean(search.length) && !isPending && (
-				<p className='text-muted-foreground pl-10 font-family-montserrat text-base font-normal pt-3'>{`Found characters: ${characterCount}`}</p>
+				<p className='text-muted-foreground font-family-montserrat pt-3 pl-10 text-base font-normal'>{`Found characters: ${characterCount}`}</p>
 			)}
 		</div>
 	)

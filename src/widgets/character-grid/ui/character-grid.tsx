@@ -1,8 +1,6 @@
 'use client'
 
-import {CharacterCard, CharacterCardSkeleton, InfiniteCharactersData, useInfiniteCharacters} from '@/entities/character'
-import {QueryKeys} from '@/shared/constants'
-import {useObserveQuery} from '@/shared/hooks/useObserveQuery'
+import {CharacterCard, CharacterCardSkeleton, useInfiniteCharacters} from '@/entities/character'
 import {cn} from '@/shared/lib/utils'
 import {useStore} from '@/shared/store/useStore'
 import Link from 'next/link'
@@ -43,7 +41,6 @@ export const CharacterGrid = ({className, ...rest}: CharacterGridProps) => {
 				>
 					<CharacterCard
 						character={character}
-						// TODO: make it work with css
 					/>
 				</Link>
 			))}
@@ -52,7 +49,7 @@ export const CharacterGrid = ({className, ...rest}: CharacterGridProps) => {
 				Array.from({length: 8}).map((_, index) => (
 					<CharacterCardSkeleton
 						key={index}
-						className={index < 2 ? 'col-span-3' : 'col-span-2'}
+						className={index < 2 ? 'col-span-6 md:col-span-3 xl:col-span-3' : 'col-span-6 md:col-span-3 xl:col-span-2'}
 					/>
 				))}
 			{query.isError && (
