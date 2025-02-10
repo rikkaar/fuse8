@@ -99,4 +99,4 @@ jobs:
           fi
       - name: Run new container
         run: |
-          docker run -d -p ${{ needs.overall.outputs.port }}:8080 --name ${{ needs.overall.outputs.container_name }} ${{ env.REGISTRY }}/${{ github.repository }}:${{ github.ref_name }}
+          docker run -d -p ${{ needs.overall.outputs.port }}:3000 --name ${{ needs.overall.outputs.container_name }} ${{ env.REGISTRY }}/${{ github.repository }}:${{ github.ref_name }}
