@@ -46,7 +46,7 @@ export const metadata: Metadata = {
 		template: '%s | Fuse8',
 		default: 'Fuse8',
 	},
-	description: 'RiM search page',
+	description: 'Rik and Morty search page',
 }
 
 export const revalidate = 86400 // One day

@@ -26,8 +26,7 @@ export const CharacterGrid = ({className, ...rest}: CharacterGridProps) => {
 	return (
 		<div
 			className={cn(
-				'grid-rows-[150px] grid h-full w-full auto-rows-[150px] grid-cols-6 gap-5 md:grid-rows-[262px_150px]',
-				'',
+				'grid h-full w-full auto-rows-[150px] grid-cols-6 grid-rows-[150px] gap-5 md:grid-rows-[262px_150px]',
 				className,
 			)}
 			{...rest}
